@@ -1,13 +1,33 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { IoCart } from "react-icons/io5";
+import useCarts from "../../../hooks/useCarts";
 
 const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const [cart] = useCarts();
 
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch((error) => {
+                console.log(error);
+            })
+    };
     const navOptions = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/menu">Our Menu</Link></li>
         <li><Link to="/order/salad">Order Food</Link></li>
-        <li><Link to="/login">Login</Link></li>
-        
+        <li><Link to="/dashboard/cart">
+            <button className="btn">
+            <IoCart className="mr-2" />
+                <div className="badge badge-secondary">+{cart.length}</div>
+            </button>
+        </Link></li>
+        {user ? <li><button onClick={handleLogOut}>Log Out</button></li> : <li><Link to="/login">Login</Link></li>}
+        <li><Link to="/secret">Secret</Link></li>
+
     </>
 
     return (
