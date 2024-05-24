@@ -5,10 +5,11 @@ import { FaBook, FaEnvelope, FaList, FaRegCalendarAlt, FaUser, FaUtensils } from
 import { MdRateReview } from "react-icons/md";
 import { MdPlaylistAddCircle } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
     //TODO: get admin value from the database
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     return (
         <div className="flex">
             <div className="w-64 min-h-screen bg-orange-400">
